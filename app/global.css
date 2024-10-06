@@ -1,0 +1,69 @@
+.main-layout{
+    display: flex;
+    gap: 20px;
+}
+
+.uploader{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+::-webkit-scrollbar {
+    /* Styles for scrollbar */
+    width: 10px;
+    height: 5px;
+    display: none;
+  }
+  body > * ::-webkit-scrollbar {
+    /* Styles for scrollbar */
+    display: block;
+    width: 8px;
+    height: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    /* Styles for scrollbar thumb */
+    background-color: rgb(108, 33, 149);
+    border-radius: 10px;
+    height: 2px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    /* Styles for scrollbar track */
+    background-color: transparent;
+  }
+  .button {
+    background-color: rgba(100, 100, 100, 0.7);
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 6px 6px;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 50px;
+    width: 200px;
+}
+
+.button:hover{
+    background-color: rgba(100, 100, 100, 0.9);
+}
+
+.landing-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+a{
+    text-decoration: none;
+  }

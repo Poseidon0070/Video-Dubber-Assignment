@@ -1,0 +1,53 @@
+.navbar {
+    width: rem(100px);
+    height: 90vh;
+    padding: 3px;
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+    border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    border-top: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  }
+  
+  .navbarMain {
+    flex: 1;
+    margin-top: rem(50px);
+    height: 60vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .link {
+    width: rem(70px);
+    height: rem(70px);
+    border-radius: var(--mantine-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  
+    &:hover {
+      background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+    }
+  
+    &[data-active] {
+      &,
+      &:hover {
+        background-color: var(--mantine-color-blue-light);
+        color: var(--mantine-color-blue-light-color);
+      }
+    }
+  }
+
+.nav-controller {
+  height: 30px;
+  width: 30px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.name {
+  font-size: 12px;
+}
+

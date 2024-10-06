@@ -3,9 +3,11 @@ import '@mantine/core/styles.css';
 import React from 'react';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { theme } from '../theme';
+import Sidebar from '@/components/Sidebar'
+import './global.css'
 
 export const metadata = {
-  title: 'Mantine Next.js template',
+  title: 'Audio Cutter',
   description: 'I am using Mantine with Next.js!',
 };
 
@@ -21,7 +23,14 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <div className='main-layout'>
+            <div>
+              <Sidebar />
+            </div>
+            {children}
+          </div>
+        </MantineProvider>
       </body>
     </html>
   );
