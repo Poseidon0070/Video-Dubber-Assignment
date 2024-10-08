@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
-import { Button } from '@mantine/core';
+import { Button, Flex } from '@mantine/core';
 import classes from './AudioCutterEditor.module.css';
 // @ts-ignore
 import Timeline from 'wavesurfer.js/dist/plugins/timeline.esm.js';
@@ -10,6 +10,8 @@ import { FaPlay, FaPause } from "react-icons/fa6";
 import { RiScissors2Fill } from "react-icons/ri";
 import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { NativeSelect } from '@mantine/core';
+import '@/app/global.css'
 
 export default function AudioCutterEditor({ file }: { file: File }) {
   const waveformRef = useRef<HTMLDivElement>(null);
@@ -18,6 +20,7 @@ export default function AudioCutterEditor({ file }: { file: File }) {
   const regions = useRef<any>(RegionsPlugin.create()).current;
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [fileFormat, setFileFormat] = useState('mp3')
 
   // Function to initialize or reload the waveform
   const loadWaveform = (audioUrl: string) => {
@@ -30,7 +33,7 @@ export default function AudioCutterEditor({ file }: { file: File }) {
     wavesurferRef.current = WaveSurfer.create({
       container: waveformRef.current!,
       height: 100,
-      waveColor: '#39FF14',
+      waveColor: '#21dfa6',
       progressColor: 'rgb(100, 0, 100)',
       plugins: [
         Timeline.create({
@@ -43,13 +46,12 @@ export default function AudioCutterEditor({ file }: { file: File }) {
     // Load the audio URL into WaveSurfer
     wavesurferRef.current.load(audioUrl);
 
-    // When WaveSurfer is ready, add a default region
     wavesurferRef.current.on('ready', () => {
       regions.addRegion({
         start: 0,
         end: wavesurferRef.current!.getDuration(),
-        content: 'Resize',
-        color: 'rgba(100, 100, 100, 0.3)', // Semi-transparent gray
+        content: '',
+        color: 'rgba(100, 100, 100, 0.3)',
         drag: true,
         resize: true,
       });
@@ -263,7 +265,7 @@ export default function AudioCutterEditor({ file }: { file: File }) {
     if (audioUrl) {
       const link = document.createElement('a');
       link.href = audioUrl;
-      link.download = 'trimmed-audio.wav'; // You can customize the filename and extension
+      link.download = `downloaded-audio.${fileFormat}`; 
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -272,19 +274,33 @@ export default function AudioCutterEditor({ file }: { file: File }) {
     }
   };
 
+
+
   return (
-    <div className={classes['container']}>
-      <div ref={waveformRef} style={{ width: '95%', height: '100px' }}></div>
-      <div id="wave-timeline" style={{ width: '95%', height: '50px' }}></div>
-      <div className={classes['audio-setting']}>
-        <Button onClick={handlePlay} className={classes['play-button']}>{isPlaying ? <FaPause size={15} /> : <FaPlay size={15} />}</Button>
-        <Button onClick={handleCrop} className={classes['play-button']}><RiScissors2Fill size={20} /><p style={{margin:"10px"}}>Crop</p></Button>
-        <Button onClick={handleRemove} className={classes['play-button']}><MdDelete size={20} /><p style={{margin:"10px"}}>Remove</p></Button>
-        <Button onClick={handleDownload} className={classes['play-button']}>
-          <FaDownload size={20}/>
-          <p style={{ margin: "10px" }}>Save</p>
-        </Button>
-      </div>
-    </div>
+<Flex direction="column" align="center" style={{ minHeight: '100vh' }}>
+  {/* Main content at the center */}
+  <Flex direction='column' w="90vw" justify="center" style={{ flexGrow: 1 }} align="center">
+    <div ref={waveformRef} id="waveform" style={{ width: '95%', height: '100px' }} className={classes.waveform}></div>
+    <div id="wave-timeline" style={{ width: '95%', height: '50px' }} className={classes.timeline}></div>
+    <Flex justify="flex-end" me="60px" gap="20px">
+      <Button onClick={handleCrop} className={classes['play-button']}><RiScissors2Fill size={20} /><p style={{ margin: "10px" }}>Crop</p></Button>
+      <Button onClick={handleRemove} className={classes['play-button']}><MdDelete size={20} /><p style={{ margin: "10px" }}>Remove</p></Button>
+    </Flex>
+  </Flex>
+
+  {/* Bottom controls aligned to bottom */}
+  <Flex justify="space-between" align="center" w="100%" p={10} style={{ marginTop: 'auto', borderTop:"1px solid gray" }}>
+    <Button onClick={handlePlay} w={80} h={40} ms={20} className={classes['play-button']}>
+      {isPlaying ? <FaPause size={15} /> : <FaPlay size={15} />}
+    </Button>
+    <Flex align="center" gap="lg" me="60px">
+      <NativeSelect radius="xl" data={['mp3', 'wav', 'aac', 'ogg']} onChange={e => setFileFormat(e.target.value)} />
+      <Button onClick={handleDownload} className={classes['play-button']}>
+        <FaDownload size={20} />
+        <p style={{ margin: "10px" }}>Save</p>
+      </Button>
+    </Flex>
+  </Flex>
+</Flex>
   );
 }

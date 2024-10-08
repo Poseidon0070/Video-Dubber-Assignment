@@ -67,3 +67,24 @@
 a{
     text-decoration: none;
   }
+
+  #waveform ::part(wrapper) {
+    --box-size: 10px;
+    background-size: 100% var(--box-size), var(--box-size) 100%;
+  }
+  
+  /* Styling the cursor */
+
+  /* Styling the region handle */
+  #waveform ::part(region-handle-right) {
+    border-right-width: 7px !important;
+    border-right-color: #21dfa6 !important;
+    border-radius: 20px;
+  }
+  
+  #waveform ::part(region-handle-left) {
+    border-left-width: 7px !important;
+    border-left-color: #21dfa6 !important;
+    border-radius: 20px;
+  }
+  

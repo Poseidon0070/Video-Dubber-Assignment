@@ -10,7 +10,6 @@
     display: flex;
     width: 90vw;
     justify-content: space-evenly;
-    margin-top: 20px;
     padding: 20px;
     border-top: 0.5px solid gray;
 }
@@ -31,3 +30,35 @@
 .play-button:hover{
     background-color: rgba(100, 100, 100, 0.9);
 }
+
+/* Thicker and styled waveform region */
+.wavesurfer-region {
+    height: 60px !important; /* Adjust thickness here */
+    background-color: rgba(100, 0, 200, 0.4) !important;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+  }
+  
+  /* Thicker handle styling */
+  .wavesurfer-handle {
+    width: 12px !important; /* Adjust handle width */
+    background-color: #fff;
+  }
+  /* Custom styling for waveform and timeline container */
+  .waveform {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .timeline {
+    border-top: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .waveform-region {
+    height: 20px !important; /* Adjust the region's height */
+    border-top: 3px solid rgba(0, 0, 0, 0.8) !important; /* Thicker top border */
+    border-bottom: 3px solid rgba(0, 0, 0, 0.8) !important; /* Thicker bottom border */
+  }
+
+  /* Styling the waveform container */
